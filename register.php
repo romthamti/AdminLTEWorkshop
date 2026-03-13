@@ -23,7 +23,7 @@
     <div class="card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form id="frmAddUser" name="frmAddUser" action="registerprocess.php" method="post">
+      <form id="frmAddUser" name="frmAddUser" action="register_insert.php" method="post">
         <div class="input-group mb-3">
           <input id="inputFullname" name="inputFullname" type="text" class="form-control" placeholder="Full name" novalidate>
           <div class="input-group-append">
@@ -60,14 +60,14 @@
           <div class="col-8">
             <div class="icheck-primary">
               <input type="checkbox" id="chkAgreeTerms" name="chkAgreeTerms" value="agree">
-              <label for="agreeTerms">
+              <label for="chkAgreeTerms">
                I agree to the <a href="#">terms</a>
               </label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button id="btnRegis" name="btnRegis" type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" id="btnRegis" name="btnRegis" class="btn btn-primary btn-block">Register</button>
           </div>
           <!-- /.col -->
         </div>
@@ -82,90 +82,105 @@
 </div>
 <!-- /.register-box -->
 <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- jQuery Validate -->
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-
-<!-- Bootstrap -->
-<script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="./dist/js/adminlte.min.js"></script>
-
-<!-- Validate Script -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- jquery-validation -->
+<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="plugins/jquery-validation/additional-methods.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
 <script>
-$(document).ready(function(){
 
+  
   $('#frmAddUser').validate({
     rules: {
-      inputFullname:{
+      inputFullname: {
         required: true,
-        minlength: 10
+        minlength: 10,
       },
-      inputemail:{
+      inputemail: {
         required: true,
-        email: true
+        email: true,
       },
       inputpass: {
         required: true,
-        minlength: 5
+        minlength: 6
       },
-      inputconfirmpass:{
+        inputconfirmpass: {
         required: true,
-        minlength: 5
+        minlength: 6,
+        
       },
-      chkAgreeTerms:{
-        required: true
-      }
-    },
-    messages:{
-      inputFullname:{
-        required: "กรุณาระบุ ชื่อ",
-        minlength: "กรุณาระบุ อย่างน้อย 10 ตัว"
-      },
-      inputemail:{
-        required: "กรุณาระบุ อีเมล",
-        email: "กรุณาตรวจสอบอีเมล"
-      },
-      inputpass:{
-        required: "กรุณาระบุ รหัสผ่าน",
-        minlength: "กรุณาระบุ อย่างน้อย 5 ตัว"
-      },
-      inputconfirmpass:{
-        required: "กรุณายืนยันรหัสผ่าน",
-        equalTo: "รหัสผ่านไม่ตรงกัน"
-      },
-      chkAgreeTerms:{
-        required: "กรุณายอมรับเงื่อนไข"
-      }
-    },
+      chkAgreeTerms: {
+        required: true,
 
+      }
+    },
+    messages: {
+      inputName: {
+        required: "กรุณากรอกชื่อลงทะเบียน ",
+        name: "กรุณาตรวจสอบชื่อ"
+      },
+      inputemail: {
+        required: "กรุณากรอกอีเมล",
+        email: "กรุณาตรวจสอบรูปแบบอีเมล"
+      },
+      inputpass: {
+        required: "กรุณากรอกรหัสผ่าน",
+        minlength: "กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร"
+      },
+      inputconfirmpass: {
+        required: "กรุณากรอกรหัสผ่าน",
+        minlength: "กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร",
+        equalTo: "รหัสผ่านไม่ตรงกันกรุณากรอกใหม่อีกครั้ง"
+      },
+      chkAgreeTerms: "กรุณาอ่านข้อตกลงก่อนรับเงื่อนไข"
+    },
     errorElement: 'span',
-    errorClass: 'invalid-feedback',
-
-    highlight: function(element) {
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.input-group').append(error);
+      element.closest('.icheck-primary').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
       $(element).addClass('is-invalid');
     },
-    unhighlight: function(element) {
+    unhighlight: function (element, errorClass, validClass) {
       $(element).removeClass('is-invalid');
-    },
-
-    errorPlacement: function(error, element) {
-      if (element.closest('.input-group').length) {
-        error.insertAfter(element.closest('.input-group'));
-      } else {
-        error.insertAfter(element);
-      }
     }
-
   });
-
-});
 </script>
-<!-- jQuery -->
-<script src="./plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="./dist/js/adminlte.min.js"></script>
+<script>
+
+$('#togglePass').click(function () {
+    let input = $('#inputPass');
+
+    if (input.attr('type') === 'password') {
+        input.attr('type', 'text');
+        $(this).removeClass('fa-eye');
+        $(this).addClass('fa-eye-slash');
+    } else {
+        input.attr('type', 'password');
+        $(this).removeClass('fa-eye-slash');
+        $(this).addClass('fa-eye');
+    }
+});
+
+$('#toggleConfirmPass').click(function () {
+    let input = $('#inputConfrimPass');
+
+    if (input.attr('type') === 'password') {
+        input.attr('type', 'text');
+        $(this).removeClass('fa-eye');
+        $(this).addClass('fa-eye-slash');
+    } else {
+        input.attr('type', 'password');
+        $(this).removeClass('fa-eye-slash');
+        $(this).addClass('fa-eye');
+    }
+});
+
+</script>
 </body>
 </html>

@@ -22,9 +22,36 @@
       <a href="index.php" class="h1"><b>BC</b>KSU</a>
     </div>
     <div class="card-body">
+       <?php
+        //รับค่า msg มาจากการ GET
+        if (isset($_GET['msg'])){
+          //รับค่าข้อมูล
+          $gMsg = $_GET['msg'];
+
+          switch ($gMsg) {
+                case '1':
+                    $message="ไม่พบอีเมลล์นี้ในฐานข้อมูล หรือ กำลังรออนุมัติในขณะนี้ ";
+                    $txtColor="text-danger";
+                    break;
+                case '2':
+                    $message="รหัสผ่านไม่ถูกต้อง";
+                    $txtColor="text-danger";
+                    break;
+
+                default:
+                    $message="Sign in to start your system";
+                    $txtColor="";
+                    break;
+          }
+
+        }else{
+          $message="Sign in to start your system";
+          $txtColor="";
+        }
+      ?>
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form id="frmlogin" name="frmlogin" action="verifyUser.php" method="post" novalidate>
+      <form id="frmlogin" name="frmlogin" action="verifyUser.php" method="post" >
         <div class="input-group mb-3">
           <input id="inputEmail" name="inputEmail" type="email" class="form-control" placeholder="Email" >
           <div class="input-group-append">
@@ -34,7 +61,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input id="inputPass" name="inputPass" type="password" class="form-control" placeholder="Password" >
+          <input id="inputPass" name="inputPass"  type="password" class="form-control" placeholder="Password" >
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -69,61 +96,54 @@
 </div>
 <!-- /.login-box -->
  <!-- โหลด jQuery ก่อน -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- jquery-validation -->
+<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="plugins/jquery-validation/additional-methods.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
 
-<!-- โหลด jquery validate -->
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-
-<!-- Bootstrap -->
-<script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="./dist/js/adminlte.min.js"></script>
 <script>
-$(document).ready(function(){
 
+  
   $('#frmlogin').validate({
     rules: {
-      inputEmail:{
+      inputEmail: {
         required: true,
-        email: true
+        email: true,
       },
       inputPass: {
         required: true,
         minlength: 5
-      }
+      },
     },
-    messages:{
-      inputEmail:{
-        required: "กรุณาระบุ อีเมล",
-        email: "กรุณาตรวจสอบอีเมล"
+    messages: {
+      inputEmail: {
+        required: "กรุณากรอกอีเมลที่ลงทะเบียนไว้",
+        email: "กรุณาตรวจสอบรูปแบบอีเมล ให้ถูกต้องตามที่ลงทะเบียนไว้ ในระบบ"
       },
       inputPass: {
-        required: "กรุณาระบุ รหัสผ่าน",
-        minlength: "กรุณาระบุ อย่างน้อย 5 ตัว"
-      }
+        required: "กรุณากรอกรหัสผ่านที่ลงทะเบียนไว้",
+        minlength: "กรุณาตรวจสอบจำนวณรหัสผ่าน 5 ตัวอัง ให้ถูกต้องตามที่ลงทะเบียนไว้ ในระบบ"
+      },
     },
-
     errorElement: 'span',
-    errorClass: 'invalid-feedback',
-
-    highlight: function(element) {
+      errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.input-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
       $(element).addClass('is-invalid');
     },
-    unhighlight: function(element) {
+    unhighlight: function (element, errorClass, validClass) {
       $(element).removeClass('is-invalid');
-    },
-
-    errorPlacement: function(error, element) {
-      if (element.closest('.input-group').length) {
-        error.insertAfter(element.closest('.input-group'));
-      } else {
-        error.insertAfter(element);
-      }
     }
-
   });
-
-});
+  
 </script>
+
 
 </body>
 </html>

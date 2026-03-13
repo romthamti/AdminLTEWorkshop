@@ -1,5 +1,9 @@
 <?php
-$conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
-$conn->set_charset("utf8");
+$connDB = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
+$connDB->set_charset("utf8");
+
+if($connDB->connect_errno){
+    die("Connection failed : ".$connDB->connect_errno);
+}
 
 ?>
