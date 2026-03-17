@@ -11,14 +11,14 @@
     }
 
     //การนำคำสั่ง session มาเก็บตัวแปรและเอาออกมาแสดงให้เห็น
-    $ssImgPer=$_SESSION['imgaesPer'];
+    $ssImgPer=$_SESSION['imagesPer'];
     $ssName=$_SESSION['perName'];
     $ssLastname=$_SESSION['perLastname'];
     $ssPosition=$_SESSION['positionID'];
     $ssID=$_SESSION['pID'];
     //เตรียมภาพ Profile สำหรับการแสดง
     if ($ssImgPer=="") {
-      $pathImagePer = "asset/imageUser/user8-128x128.jpg";
+      $pathImagePer = "asset/imageUser/RomthamUser 160x160.png";
     }else{
       $pathImagePer = "asset/imageUser/".$ssImgPer;
 
@@ -31,7 +31,7 @@
     
     // 3 เชื่อฐานข้อมูล
     require('config.php');
-    require('connectMySQL.php');
+    require('connectMySQLi.php');
 
     // สำหรับแสดงผลของข้อมูล
     // 4  สร้างคำสั่ง SQL โดยใช่ "SELECT"
@@ -119,7 +119,7 @@
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="asset/imageUser/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+      <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
     </div>
 
     <!-- Navbar -->
@@ -173,7 +173,7 @@
             <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
-              <a href="DashboardMain.php" class="nav-link active">
+              <a href="dashbordMain.php" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   แดชบอร์ด
@@ -199,7 +199,7 @@
               </a>
               <ul class="nav nav-treeview ">
                 <li class="nav-item">
-                  <a href="departmemtmtViewAll.php" class="nav-link">
+                  <a href="#" class="nav-link">
                     <i class="far fa-circle nav-icon text-danger"></i>
                     <p>แผนก</p>
                   </a>
@@ -212,15 +212,17 @@
                 </li>
               </ul>
             </li>
+
             <li class="nav-header">Systems</li>
-            <li class="nav-item">
-              <a href="logout.php" class="nav-link ">
-                <i class="fas fa-arrow-circle-right nav-icon"></i>
-                <p>
-                  ออกจากระบบ
-                </p>
-              </a>
-            </li>
+          <li class="nav-item">
+            <a href="logout.php" class="nav-link">
+              <i class="fas fa-arrow-circle-right nav-icon"></i>
+              <p>
+                ออกจากระบบ
+              </p>
+            </a>
+          </li>
+
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

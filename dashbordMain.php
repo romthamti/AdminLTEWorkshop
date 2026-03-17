@@ -97,7 +97,7 @@
             
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="personalViewAll.php" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 ข้อมูลพนักงาน
@@ -116,28 +116,29 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/tables/simple.html" class="nav-link">
+                <a href="departmentViewAll.php" class="nav-link">
                   <i class="far fa-circle nav-icon text-danger" ></i>
                   <p>แผนก</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
+                <a href="positionViewAll.php" class="nav-link">
                   <i class="far fa-circle nav-icon text-warning" ></i>
                   <p>ตำแหน่งงาน</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-header">System</li>
+          <li class="nav-header">Systems</li>
           <li class="nav-item">
-            <a href="loguot.php" class="nav-link">
+            <a href="logout.php" class="nav-link">
               <i class="fas fa-arrow-circle-right nav-icon"></i>
               <p>
                 ออกจากระบบ
               </p>
             </a>
           </li>
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

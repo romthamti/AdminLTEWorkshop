@@ -1,8 +1,9 @@
 <?php
-session_start();
-
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+    session_start();
+    
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
 if(isset($_POST['inputEmail']) && isset($_POST['inputPass'])){
 
@@ -13,11 +14,9 @@ if(isset($_POST['inputEmail']) && isset($_POST['inputPass'])){
     require('config.php');
     require('connectMySQLi.php');
 
-    $pEmail = mysqli_real_escape_string($connDB,$pEmail);
-
-    $sqlLogin = "SELECT * FROM personal 
-                 WHERE personal_email='$pEmail' 
-                 AND personal_sys_status=1";
+    $sqlLogin = "SELECT * FROM personal" ; 
+    $sqlLogin .= " WHERE personal_email = '$pEmail' ";
+    $sqlLogin .= " AND personal_sys_status = 1 ";
 
     $resultLogin = $connDB->query($sqlLogin);
 
